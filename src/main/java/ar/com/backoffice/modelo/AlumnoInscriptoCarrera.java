@@ -14,7 +14,9 @@ public class AlumnoInscriptoCarrera {
     private Carrera carrera;
     private List<MateriasAprobadas> materiasAprobadas;
 
-    public AlumnoInscriptoCarrera(){
+    public AlumnoInscriptoCarrera(Alumno alumno, Carrera carrera){
+        this.alumno = alumno;
+        this.carrera = carrera;
         this.materiasAprobadas = new ArrayList<>();
     }
 

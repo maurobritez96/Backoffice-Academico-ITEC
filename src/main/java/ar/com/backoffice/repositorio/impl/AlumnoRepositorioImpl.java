@@ -28,8 +28,6 @@ public class AlumnoRepositorioImpl implements AlumnoRepositorio {
         alumnosRepositorio.add(new Alumno("Lucía", "Torres", "90123456", "1101234567", "lucia.torres@email.com", "Av. Corrientes 606"));
         alumnosRepositorio.add(new Alumno("Pedro", "Ramírez", "01234567", "1112345678", "pedro.ramirez@email.com", "Calle Alsina 707"));
 
-
-
     }
 
 
@@ -66,7 +64,7 @@ public class AlumnoRepositorioImpl implements AlumnoRepositorio {
     @Override
     public void crear(Alumno alumno) {
         if(!verificarDni(alumno.getDni())){
-            alumnosRepositorio.add(alumno);
+            this.alumnosRepositorio.add(alumno);
         }
     }
 

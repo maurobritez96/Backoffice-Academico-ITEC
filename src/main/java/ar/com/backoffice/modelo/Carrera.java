@@ -1,5 +1,4 @@
 package ar.com.backoffice.modelo;
-//clase carrera
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
