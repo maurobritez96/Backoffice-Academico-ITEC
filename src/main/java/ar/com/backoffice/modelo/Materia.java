@@ -15,11 +15,13 @@ public class Materia {
 //    private List<AlumnoInscriptoMateria> alumnosInscriptos;
     private Profesor profesor;
     private List<Materia> correlativas;
+    private CicloLectivo cicloLectivo;
     //falta la asistencia, horario
 
-    public Materia(String codigo, String nombre){
+    public Materia(String codigo, String nombre, CicloLectivo cicloLectivo){
         this.codigo = codigo;
         this.nombre = nombre;
+        this.cicloLectivo = cicloLectivo;
 //        this.alumnosInscriptos = new ArrayList<>();
         this.correlativas = new ArrayList<>();
     }

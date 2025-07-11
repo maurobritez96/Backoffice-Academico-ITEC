@@ -1,53 +1,32 @@
 package ar.com.backoffice;
 
-import ar.com.backoffice.modelo.Alumno;
-import ar.com.backoffice.modelo.AlumnoInscriptoCarrera;
-import ar.com.backoffice.modelo.Carrera;
-import ar.com.backoffice.repositorio.AlumnoInscriptoCarreraRepositorio;
-import ar.com.backoffice.repositorio.AlumnoRepositorio;
-import ar.com.backoffice.repositorio.CarreraRepositorio;
-import ar.com.backoffice.repositorio.impl.AlumnoInscriptoCarreraImpl;
-import ar.com.backoffice.repositorio.impl.AlumnoRepositorioImpl;
-import ar.com.backoffice.repositorio.impl.CarreraRepositorioImpl;
 
-import java.util.List;
-import java.util.Scanner;
+import ar.com.backoffice.modelo.Carrera;
+import ar.com.backoffice.modelo.Materia;
+import ar.com.backoffice.repositorio.CarreraRepositorio;
+import ar.com.backoffice.repositorio.CicloLectivoRepositorio;
+import ar.com.backoffice.repositorio.MateriaRepositorio;
+import ar.com.backoffice.repositorio.ProfesorRepositorio;
+import ar.com.backoffice.repositorio.impl.CarreraRepositorioImpl;
+import ar.com.backoffice.repositorio.impl.CicloLectivoRepositorioImpl;
+import ar.com.backoffice.repositorio.impl.MateriaRepositorioImpl;
+import ar.com.backoffice.repositorio.impl.ProfesorRepositorioImpl;
 
 public class Main {
     public static void main(String[] args) {
-
-        AlumnoRepositorio alumnoRepo = new AlumnoRepositorioImpl();
-        CarreraRepositorio carreraRepo = new CarreraRepositorioImpl();
-        AlumnoInscriptoCarreraRepositorio alumnoInscripto = new AlumnoInscriptoCarreraImpl();
-
-//        for(Alumno alumno : alumnoRepo.buscarTodos()){
-//            System.out.println(alumno.getNombre() + " " +  alumno.getApellido());
-//            System.out.println("---------------------------------------");
-//        }
-
-        System.out.println(alumnoRepo.buscarTodos().stream().count());
-
-        //crear un alumno nuevo
-        Alumno julio = new Alumno("Julio", "Argentino Roca", "47426591", "3765050155", "julio@gmail.com", "Itec 1");
-        alumnoRepo.crear(julio);
+        ProfesorRepositorio profesorRepositorio = new ProfesorRepositorioImpl();
+        CarreraRepositorio carreraRepositorio = new CarreraRepositorioImpl();
+        CicloLectivoRepositorio cicloLectivoRepositorio = new CicloLectivoRepositorioImpl();
+        MateriaRepositorio materiaRepositorio = new MateriaRepositorioImpl();
 
 
-        System.out.println(alumnoRepo.buscarUno("47426591"));
-        System.out.println(alumnoRepo.buscarTodos().stream().count());
-
-        //ahora inscribir a julio a la carrera de gatronomia
-        AlumnoInscriptoCarrera alumnoinscripto1 = new AlumnoInscriptoCarrera(julio, carreraRepo.buscarUno("Gastronomia").get(0));
-        alumnoInscripto.crear(alumnoinscripto1);// esto agrega a la base de datos
-        //fijarme si julio esta inscripto a la carrera
-
-        alumnoInscripto.buscarUno("47426591");
-
-        //listar todos los alumnos de la carrera
-        for (AlumnoInscriptoCarrera alumnoIns : alumnoInscripto.buscarTodos("Gastronomia")) {
-            System.out.println(alumnoIns.getAlumno().getNombre());
-            System.out.println("-------------------------------------");
-
-        }
+//        System.out.println("materias: " + materiaRepositorio.buscarTodos());
+        Materia lenguaje2 = materiaRepositorio.buscarUno("as20len2").get(0);
+        System.out.println("codigo: " + lenguaje2.getCodigo());
+        System.out.println("nombre: " + lenguaje2.getNombre());
+        System.out.println("ciclo lectivo: " + lenguaje2.getCicloLectivo().getAno());
+        System.out.println("correlativas: " + lenguaje2.getCorrelativas());
+        System.out.println("profesor: " + lenguaje2.getProfesor().getNombre() + " " + lenguaje2.getProfesor().getApellido());
     }
 }
 

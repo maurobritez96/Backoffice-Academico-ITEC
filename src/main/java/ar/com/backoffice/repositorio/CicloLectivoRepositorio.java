@@ -5,5 +5,5 @@ import ar.com.backoffice.modelo.CicloLectivo;
 import java.util.List;
 
 public interface CicloLectivoRepositorio extends CRUDRepositorio<CicloLectivo> {
-    List<CicloLectivoRepositorio> buscarUno(String ano);
+    List<CicloLectivo> buscarUno(String ano);
 }
