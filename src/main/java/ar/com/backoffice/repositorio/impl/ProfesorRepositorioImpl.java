@@ -12,7 +12,6 @@ public class ProfesorRepositorioImpl  implements ProfesorRepositorio {
     public  ProfesorRepositorioImpl(){
         profesoresRepositorio = new ArrayList<>();
         cargarData();
-
     }
 
     private void cargarData(){
@@ -31,26 +30,67 @@ public class ProfesorRepositorioImpl  implements ProfesorRepositorio {
 
     @Override
     public List<Profesor> buscarUno(String matricula) {
-        return List.of();
+        List<Profesor> profesoresResult = new ArrayList<>();
+        for (Profesor profesor: this.profesoresRepositorio){
+            if(profesor.getMatricula().equals(matricula)){
+                profesoresResult.add(profesor);
+            }
+        }
+        return profesoresResult;
     }
 
     @Override
     public List<Profesor> buscarTodos() {
-        return List.of();
+        return this.profesoresRepositorio;
     }
 
     @Override
     public void crear(Profesor profesor) {
-
+        this.profesoresRepositorio.add(profesor);
     }
 
     @Override
     public void modificar(Profesor profesor) {
-
+        int indice = 0;
+        if(verificarExistencia(profesor)){
+            indice = buscarIndice(profesor);
+            this.profesoresRepositorio.get(indice).setNombre(profesor.getNombre());
+            this.profesoresRepositorio.get(indice).setApellido(profesor.getApellido());
+            this.profesoresRepositorio.get(indice).setEmail(profesor.getEmail());
+            this.profesoresRepositorio.get(indice).setMatricula(profesor.getMatricula());
+            this.profesoresRepositorio.get(indice).setTelefono(profesor.getTelefono());
+            this.profesoresRepositorio.get(indice).setDomicilio(profesor.getDomicilio());
+        }
     }
 
     @Override
     public void eliminar(Profesor profesor) {
+        int indice = 0;
+        if(verificarExistencia(profesor)){
+            indice = buscarIndice(profesor);
+            this.profesoresRepositorio.remove(indice);
+        }
+    }
 
+    private boolean verificarExistencia(Profesor profesor){
+        boolean existe = false;
+        for(Profesor profe: this.profesoresRepositorio){
+            if(profe.getDni().equals(profesor.getDni())){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
+    private int buscarIndice(Profesor profesor){
+        int indice = 0;
+        for(Profesor profe: this.profesoresRepositorio){
+            if(profe.getDni().equals(profesor.getDni())){
+                break;
+            }
+            indice++;
+        }
+        return indice;
     }
 }

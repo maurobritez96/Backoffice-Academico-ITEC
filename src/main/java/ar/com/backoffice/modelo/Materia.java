@@ -10,13 +10,20 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Materia {
+    private String codigo;
     private String nombre;
-    private List<AlumnoInscriptoMateria> alumnosInscriptos;
+//    private List<AlumnoInscriptoMateria> alumnosInscriptos;
     private Profesor profesor;
-    //falta la asistencia, horario,corelativas
+    private List<Materia> correlativas;
+    private CicloLectivo cicloLectivo;
+    //falta la asistencia, horario
 
-    public Materia(){
-        this.alumnosInscriptos = new ArrayList<>();
+    public Materia(String codigo, String nombre, CicloLectivo cicloLectivo){
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.cicloLectivo = cicloLectivo;
+//        this.alumnosInscriptos = new ArrayList<>();
+        this.correlativas = new ArrayList<>();
     }
 }
 
