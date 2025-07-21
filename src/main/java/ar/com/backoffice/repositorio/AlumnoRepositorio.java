@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AlumnoRepositorio extends CRUDRepositorio<Alumno> {
 
-    List<Alumno> buscarUno(String dni);
+    Alumno buscarUno(int indice);
 
 }

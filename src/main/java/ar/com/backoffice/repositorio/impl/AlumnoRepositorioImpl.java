@@ -32,15 +32,9 @@ public class AlumnoRepositorioImpl implements AlumnoRepositorio {
 
 
     @Override
-    public List<Alumno> buscarUno(String dni) {
-      List<Alumno>alumnos = new ArrayList<>();
-      for(Alumno alumno: this.alumnosRepositorio){
-          if(alumno.getDni().equals(dni) ){
-              alumnos.add(alumno);
-              break;
-          }
-      }
-        return alumnos;
+    public Alumno buscarUno(int indice) {
+
+      return this.alumnosRepositorio.get(indice);
     }
 
     @Override
@@ -48,63 +42,23 @@ public class AlumnoRepositorioImpl implements AlumnoRepositorio {
       return this.alumnosRepositorio;
     }
 
-    private boolean verificarDni(String dni){
-        boolean encontrado = false;
-        for(Alumno alumno: this.alumnosRepositorio){
-            if (alumno.getDni().equals(dni)){
-                encontrado = true;
-                break;
-            }
-        }
-        return  encontrado;
-    }
-
-
-
     @Override
     public void crear(Alumno alumno) {
-        if(!verificarDni(alumno.getDni())){
-            this.alumnosRepositorio.add(alumno);
-        }
+        this.alumnosRepositorio.add(alumno);
     }
 
-    private int buscarIndice(Alumno alumno){
-        int indice = 0;
-        for(Alumno alu: this.alumnosRepositorio  ){
-            if(alu.getDni().equals(alumno.getDni())){
-                break;
 
-            }
-            indice ++;
-        }
-        return indice;
+    @Override
+    public void modificar(int indice,Alumno alumno) {
+        this.alumnosRepositorio.get(indice).setNombre(alumno.getNombre());
+        this.alumnosRepositorio.get(indice).setApellido(alumno.getApellido());
+        this.alumnosRepositorio.get(indice).setTelefono(alumno.getTelefono());
+        this.alumnosRepositorio.get(indice).setEmail(alumno.getEmail());
+        this.alumnosRepositorio.get(indice).setDomicilio(alumno.getDomicilio());
     }
 
     @Override
-    public void modificar(Alumno alumno) {
-        int indice = 0;
-        if(verificarDni(alumno.getDni())){
-            indice = buscarIndice(alumno);
-            this.alumnosRepositorio.get(indice).setNombre(alumno.getNombre());
-            this.alumnosRepositorio.get(indice).setApellido(alumno.getApellido());
-            this.alumnosRepositorio.get(indice).setTelefono(alumno.getTelefono());
-            this.alumnosRepositorio.get(indice).setEmail(alumno.getEmail());
-            this.alumnosRepositorio.get(indice).setDomicilio(alumno.getDomicilio());
-        }
-
-    }
-
-    @Override
-    public void eliminar(Alumno alumno) {
-        int indice = 0;
-        for(Alumno alu: this.alumnosRepositorio){
-            if(alu.getDni().equals(alumno.getDni())){
-                indice = buscarIndice(alumno);
-                this.alumnosRepositorio.remove(indice);
-                break;
-            }
-
-        }
-
+    public void eliminar(int indice) {
+        this.alumnosRepositorio.remove(indice);
     }
 }
